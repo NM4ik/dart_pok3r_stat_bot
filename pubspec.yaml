@@ -12,6 +12,7 @@ dependencies:
   freezed: ^2.3.3
   freezed_annotation: ^2.2.0
   nyxx: ^5.0.1
+  nyxx_commands: ^5.0.2
 #   path: ^1.8.0
 
 dev_dependencies:

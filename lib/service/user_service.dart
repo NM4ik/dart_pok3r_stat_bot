@@ -1,6 +1,5 @@
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:pok3r_bot/core/db.dart';
-import 'package:uuid/uuid.dart';
 
 import '../models/user/user.dart';
 
@@ -9,7 +8,9 @@ class UserService {
   final userError = UserError();
 
   Future<User?> createUser(String name) async {
-    final userCollection = _db.collection('user_collection');
+    final userCollection = _db?.collection('user_collection');
+
+    if (userCollection == null) return null;
 
     /// validate user name
     if (name.isEmpty || name.length < 5) {

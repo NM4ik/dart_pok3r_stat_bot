@@ -13,7 +13,7 @@ void main(List<String> arguments) async {
     final discordBot = Discord();
     await discordBot.create();
   } catch (e) {
-    Handler.catchError(exception: e);
+    Handler.catchError(exception: e, methodName: 'main');
     return;
   }
 }
