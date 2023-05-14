@@ -1,12 +1,14 @@
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:pok3r_bot/core/db.dart';
+import 'package:pok3r_bot/feature/domain/repositories/user.dart';
 
 import '../models/user/user.dart';
 
-class UserService {
+class UserRepository extends IUserRepository {
   final _db = Database.database;
-  final userError = UserError();
+  // final userError = UserError();
 
+  @override
   Future<User?> createUser(String name) async {
     final userCollection = _db?.collection('user_collection');
 
@@ -14,9 +16,9 @@ class UserService {
 
     /// validate user name
     if (name.isEmpty || name.length < 5) {
-      return throw userError.userWrongNameException;
+      return throw UserError().userWrongNameException;
     } else if (!(await userCollection.find(where.eq('name', name)).isEmpty)) {
-      return throw userError.userAlreadyExists;
+      return throw UserError().userAlreadyExists;
     }
 
     final uuid = Uuid();
@@ -32,6 +34,22 @@ class UserService {
 
     return User.fromJson(recordedResult);
   }
+
+  @override
+  Future<List<User>> getAllUsers() {
+    // TODO: implement getAllUsers
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<User?> getSingleUser(String name) {
+    // TODO: implement getSingleUser
+    throw UnimplementedError();
+  }
+
+  // Future<User?> createUser(String name) async {
+
+  // }
 }
 
 class UserError {
